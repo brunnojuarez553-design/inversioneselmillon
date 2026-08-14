@@ -103,7 +103,7 @@
   <main>
     <section class="hero" id="inicio">
       <div class="hero-media" aria-hidden="true">
-        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture aria-hidden="true">
+        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" fetchpriority="high" disablepictureinpicture aria-hidden="true">
           <source src="https://res.cloudinary.com/dgp7uhps3/video/upload/v1786677975/InDown_s4j0bt.mp4" type="video/mp4">
         </video>
       </div>
@@ -441,45 +441,61 @@
     (() => {
       const video = document.getElementById('heroVideo');
       if (video) {
+        const directVideo = 'https://res.cloudinary.com/dgp7uhps3/video/upload/v1786677975/InDown_s4j0bt.mp4';
+
+        video.autoplay = true;
+        video.loop = true;
         video.muted = true;
         video.defaultMuted = true;
         video.playsInline = true;
+        video.preload = 'auto';
+        video.setAttribute('autoplay', '');
         video.setAttribute('muted', '');
         video.setAttribute('playsinline', '');
         video.setAttribute('webkit-playsinline', '');
+        video.setAttribute('preload', 'auto');
+        video.setAttribute('fetchpriority', 'high');
 
-        const directVideo = 'https://res.cloudinary.com/dgp7uhps3/video/upload/v1786677975/InDown_s4j0bt.mp4';
         const startVideo = () => {
+          video.autoplay = true;
           video.muted = true;
           video.defaultMuted = true;
           const promise = video.play();
           if (promise && typeof promise.catch === 'function') promise.catch(() => {});
         };
+
         const ensureVideoSource = () => {
-          const current = video.currentSrc || video.querySelector('source')?.src || '';
+          const current = video.currentSrc || video.querySelector('source')?.src || video.src || '';
           if (!current.includes('InDown_s4j0bt.mp4')) {
             video.src = directVideo;
           }
-          if (video.networkState === HTMLMediaElement.NETWORK_EMPTY || video.readyState === 0) video.load();
+          if (video.networkState === HTMLMediaElement.NETWORK_EMPTY || video.readyState < 2) {
+            video.load();
+          }
           startVideo();
         };
 
-        video.addEventListener('loadeddata', () => { video.classList.add('is-playing'); startVideo(); }, { once: true });
-        video.addEventListener('canplay', () => { video.classList.add('is-playing'); startVideo(); }, { once: true });
+        video.addEventListener('loadedmetadata', startVideo);
+        video.addEventListener('loadeddata', () => { video.classList.add('is-playing'); startVideo(); });
+        video.addEventListener('canplay', () => { video.classList.add('is-playing'); startVideo(); });
         video.addEventListener('playing', () => video.classList.add('is-playing'));
         video.addEventListener('error', () => {
           if (video.src !== directVideo) {
             video.src = directVideo;
-            video.load();
-            startVideo();
           }
-        }, { once: true });
-        ensureVideoSource();
-        document.addEventListener('DOMContentLoaded', ensureVideoSource, { once: true });
-        window.addEventListener('pageshow', ensureVideoSource);
-        ['touchstart', 'pointerdown'].forEach(eventName => {
-          window.addEventListener(eventName, startVideo, { once: true, passive: true });
+          video.load();
+          startVideo();
         });
+
+        ensureVideoSource();
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', ensureVideoSource, { once: true });
+        } else {
+          requestAnimationFrame(ensureVideoSource);
+          setTimeout(ensureVideoSource, 120);
+        }
+        window.addEventListener('load', ensureVideoSource, { once: true });
+        window.addEventListener('pageshow', ensureVideoSource);
         document.addEventListener('visibilitychange', () => {
           if (!document.hidden) ensureVideoSource();
         });
