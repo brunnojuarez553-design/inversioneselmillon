@@ -480,3 +480,162 @@ body:has(.about-modal[open]){overflow:hidden}
 .routing-presentation-mock{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:14px}
 .routing-presentation-mock>i{font-style:normal;color:#555e6b;font-size:22px}.routing-demo-client,.routing-demo-engine,.routing-demo-seller{border:1px solid #292e37;background:#15181e;border-radius:16px;padding:18px;min-height:180px;display:flex;flex-direction:column;justify-content:center;gap:8px}.routing-demo-client span,.routing-demo-engine small,.routing-demo-seller span{font-size:9px;color:#89919c;text-transform:uppercase;letter-spacing:.1em}.routing-demo-client strong,.routing-demo-engine strong,.routing-demo-seller strong{font-size:15px}.routing-demo-client button{border:0;border-radius:10px;padding:11px;background:var(--red);color:#fff;font-weight:900;font-size:10px}.routing-demo-engine{background:linear-gradient(145deg,#191c23,#101217)}.routing-demo-engine small{color:#ff6671}.routing-demo-seller b{font-family:Oswald,sans-serif;font-size:34px;color:rgba(255,255,255,.12)}
 @media(max-width:700px){.routing-presentation-mock{grid-template-columns:1fr}.routing-presentation-mock>i{transform:rotate(90deg);text-align:center}.routing-demo-client,.routing-demo-engine,.routing-demo-seller{min-height:125px}}
+
+
+/* V5 · Inventory modal fullscreen + 2 cards per row */
+.inventory-browser-modal{
+  width:100vw!important;
+  height:100dvh!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+}
+.inventory-browser-shell{
+  width:100%;
+  height:100dvh;
+  max-height:none!important;
+  padding:72px clamp(16px,3vw,48px) 36px!important;
+  overflow-y:auto;
+}
+.inventory-browser-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:18px!important;
+}
+.inventory-browser-grid .vehicle-card-pro .vehicle-media{
+  height:clamp(190px,28vw,360px)!important;
+}
+.inventory-browser-modal>.modal-close{
+  position:fixed!important;
+  top:18px!important;
+  right:18px!important;
+  z-index:999!important;
+}
+@media(max-width:620px){
+  .inventory-browser-shell{padding:64px 10px 18px!important}
+  .inventory-browser-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  .inventory-browser-grid .vehicle-card-pro .vehicle-media{height:145px!important}
+  .inventory-browser-grid .vehicle-card-pro .vehicle-body{padding:11px!important}
+  .inventory-browser-grid .vehicle-card-pro .vehicle-body h3{font-size:15px!important}
+  .inventory-browser-grid .vehicle-quick-specs{gap:3px!important}
+  .inventory-browser-grid .vehicle-quick-specs>div{padding:6px 4px!important}
+  .inventory-browser-grid .vehicle-quick-specs small{font-size:6px!important}
+  .inventory-browser-grid .vehicle-quick-specs strong{font-size:8px!important}
+  .inventory-browser-grid .vehicle-card-footer{margin-top:8px!important;padding-top:8px!important}
+}
+
+
+/* V7 · filtros del inventario completo */
+.inventory-browser-toolbar{align-items:flex-end!important}
+.inventory-browser-count{display:flex;align-items:flex-end;min-width:150px}
+.inventory-browser-filters{display:grid;grid-template-columns:minmax(220px,1.3fr) minmax(180px,.8fr);gap:10px;width:min(620px,100%)}
+.inventory-browser-filters label{display:grid;gap:7px}
+.inventory-browser-filters label>span{margin:0!important;font-size:9px!important;letter-spacing:.13em!important;color:#9da4ae!important;text-transform:uppercase;font-weight:900}
+.inventory-browser-filters input,.inventory-browser-filters select{width:100%;min-height:46px;border:1px solid rgba(255,255,255,.13);border-radius:12px;background:rgba(255,255,255,.07);color:#fff;padding:0 13px;outline:none}
+.inventory-browser-filters input::placeholder{color:#777f8b}
+.inventory-browser-filters select option{color:#111;background:#fff}
+.inventory-browser-filters input:focus,.inventory-browser-filters select:focus{border-color:rgba(255,255,255,.34);background:rgba(255,255,255,.10)}
+.inventory-browser-empty{grid-column:1/-1;min-height:240px;border:1px solid rgba(255,255,255,.10);border-radius:20px;background:rgba(255,255,255,.04);display:grid;place-content:center;text-align:center;gap:8px;color:#fff}
+.inventory-browser-empty span{color:#9ca3ad;font-size:12px}
+@media(max-width:760px){.inventory-browser-toolbar{align-items:stretch!important}.inventory-browser-count{width:100%}.inventory-browser-filters{width:100%;grid-template-columns:1fr 1fr}.inventory-browser-filters input,.inventory-browser-filters select{min-height:42px;font-size:12px}}
+@media(max-width:480px){.inventory-browser-filters{grid-template-columns:1fr}.inventory-browser-toolbar{gap:12px!important}.inventory-browser-head{margin-bottom:14px!important}}
+
+
+/* V8 · barra roja superior a Financiamiento con marquee infinito */
+.experience-band{
+  height:42px;
+  background:#b90d18;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-size:10px;
+  font-weight:850;
+  border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  position:relative;
+  padding:0;
+}
+.experience-band::before,
+.experience-band::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:54px;
+  z-index:2;
+  pointer-events:none;
+}
+.experience-band::before{
+  left:0;
+  background:linear-gradient(90deg,#b90d18,transparent);
+}
+.experience-band::after{
+  right:0;
+  background:linear-gradient(270deg,#b90d18,transparent);
+}
+.experience-marquee-track{
+  display:flex;
+  flex:none;
+  width:max-content;
+  align-items:center;
+  animation:experienceMarquee 18s linear infinite;
+  will-change:transform;
+  transform:translate3d(0,0,0);
+}
+.experience-marquee-segment{
+  display:flex;
+  flex:none;
+  align-items:center;
+  gap:20px;
+  padding-right:20px;
+  white-space:nowrap;
+}
+.experience-marquee-segment span{
+  display:inline-flex;
+  align-items:center;
+  white-space:nowrap;
+}
+.experience-marquee-segment i{
+  width:4px;
+  height:4px;
+  flex:0 0 4px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 9px rgba(255,255,255,.55);
+}
+@keyframes experienceMarquee{
+  0%{transform:translate3d(0,0,0)}
+  100%{transform:translate3d(-50%,0,0)}
+}
+@media(max-width:620px){
+  .experience-band{height:36px;font-size:9px}
+  .experience-marquee-track{animation-duration:14s}
+  .experience-marquee-segment{gap:16px;padding-right:16px}
+}
+
+/* V9 · fix scroll modal Quiénes somos */
+.about-modal[open]{overscroll-behavior:contain}
+@media(max-width:800px){
+  .about-modal{
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+  }
+  .about-modal-shell{
+    min-height:auto!important;
+    height:auto!important;
+    overflow:visible!important;
+  }
+  .about-modal-content{
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  .about-modal-visual{
+    flex:0 0 auto;
+  }
+}

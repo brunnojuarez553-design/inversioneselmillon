@@ -576,13 +576,34 @@ function renderInventory(list = homeInventorySource()) {
   if (availableCount) availableCount.textContent = inventory.filter(vehicle => vehicle.status !== 'sold').length;
 }
 
+function populateFullInventoryTypes() {
+  const select = document.getElementById('allInventoryType');
+  if (!select) return;
+  const current = select.value || 'all';
+  const types = [...new Set(inventory
+    .filter(vehicle => vehicle.status !== 'sold')
+    .map(vehicle => String(vehicle.type || '').trim())
+    .filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, 'es'));
+  select.innerHTML = '<option value="all">Todos los tipos</option>' + types.map(type => `<option value="${type}">${type}</option>`).join('');
+  if ([...select.options].some(option => option.value === current)) select.value = current;
+}
+
 function renderFullInventoryModal() {
+  populateFullInventoryTypes();
+  const search = (document.getElementById('allInventorySearch')?.value || '').trim().toLowerCase();
+  const type = document.getElementById('allInventoryType')?.value || 'all';
   const list = inventory
     .filter(vehicle => vehicle.status !== 'sold')
+    .filter(vehicle => type === 'all' || String(vehicle.type || '') === type)
+    .filter(vehicle => !search || `${vehicle.brand} ${vehicle.model} ${vehicle.year} ${vehicle.type}`.toLowerCase().includes(search))
     .sort((a, b) => Number(b.featured) - Number(a.featured) || Number(b.year) - Number(a.year));
   renderVehicleCards(allInventoryGrid, list);
   const count = document.getElementById('allInventoryCount');
   if (count) count.textContent = list.length;
+  if (allInventoryGrid && !list.length) {
+    allInventoryGrid.innerHTML = '<div class="inventory-browser-empty"><strong>No encontramos vehículos</strong><span>Probá con otro tipo o búsqueda.</span></div>';
+  }
 }
 
 function apply() {
@@ -719,6 +740,8 @@ openInventoryButtons.forEach(button => button.addEventListener('click', () => {
 }));
 document.querySelector('[data-close-full-inventory]')?.addEventListener('click', () => inventoryBrowserModal?.close());
 inventoryBrowserModal?.addEventListener('click', event => { if (event.target === inventoryBrowserModal) inventoryBrowserModal.close(); });
+document.getElementById('allInventorySearch')?.addEventListener('input', renderFullInventoryModal);
+document.getElementById('allInventoryType')?.addEventListener('change', renderFullInventoryModal);
 
 const calc = () => {
   const p = +vehiclePrice.value;
