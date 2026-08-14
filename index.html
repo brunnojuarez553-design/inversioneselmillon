@@ -97,7 +97,7 @@
     <a href="#nosotros">Nosotros</a>
     <a href="#contacto">Contacto</a>
     <a href="admin.html">Panel de inventario</a>
-    <a class="btn btn-primary" href="https://instagram.com/inversioneselmillon">Escribir por Instagram</a>
+    <a class="btn btn-primary" data-smart-whatsapp data-wa-source="general" data-wa-message="Hola, quiero hablar con un asesor de Inversiones El Millón." href="https://wa.me/18094128551" target="_blank" rel="noopener">Escribir por WhatsApp</a>
   </aside>
 
   <main>
@@ -111,8 +111,8 @@
       <div class="hero-grid container">
         <div class="hero-copy reveal">
           <div class="hero-kicker"><span class="live-dot"></span> Puerto Rico · Inventario seleccionado</div>
-          <h1>Tu próximo auto.<br><em>Sin vueltas.</em></h1>
-          <p>Una experiencia moderna para descubrir, comparar y consultar vehículos con atención directa de Inversiones El Millón.</p>
+          <h1>Tu próximo vehículo.<br><em>Sin complicaciones.</em></h1>
+          <p>Explora nuestro inventario, compara opciones y recibe atención directa para encontrar el vehículo que mejor va contigo.</p>
           <div class="hero-actions">
             <a class="btn btn-primary btn-lg" href="#inventario">Ver inventario <b>→</b></a>
             <a class="btn btn-glass btn-lg" href="https://maps.app.goo.gl/FJE6jjyJiNayT6bp6" target="_blank" rel="noopener">Ver ubicación <b>↗</b></a>
@@ -126,7 +126,7 @@
 
       </div>
       <div class="hero-bottom container">
-        <span class="hero-bottom-label">Experiencia automotriz</span>
+        <span class="hero-bottom-label">Experiencia de compra</span>
         <div class="brand-cloud"><span>INVENTARIO</span><span>FINANCIAMIENTO</span><span>TRADE-IN</span><span>ATENCIÓN DIRECTA</span></div>
       </div>
     </section>
@@ -153,7 +153,7 @@
             <small>Publicar, editar, destacar o marcar una unidad como vendida actualiza el catálogo del concesionario.</small>
           </div>
           <div class="inventory-system-count"><strong id="availableCount">0</strong><span>vehículos disponibles</span></div>
-          <div class="inventory-system-actions"><a class="inventory-system-link" href="admin.html">Ver panel <b>↗</b></a><button class="inventory-system-link inventory-view-all" id="openInventoryModal" type="button">Ver todo el inventario <b>→</b></button></div>
+          
         </div>
         <div class="inventory-grid" id="inventoryGrid"></div>
         <div class="inventory-section-actions"><button class="btn btn-light btn-lg" id="openInventoryModalSecondary" type="button">Ver todo el inventario <b>→</b></button></div>
@@ -184,9 +184,20 @@
       </div>
     </section>
 
-    <section class="experience-band">
-      <div class="container experience-row">
-        <span>SELECCIÓN</span><i></i><span>FINANCIAMIENTO</span><i></i><span>TRADE-IN</span><i></i><span>ATENCIÓN DIRECTA</span>
+    <section class="experience-band" aria-label="Experiencia El Millón">
+      <div class="experience-marquee-track">
+        <div class="experience-marquee-segment">
+          <span>SELECCIÓN</span><i></i><span>FINANCIAMIENTO</span><i></i><span>TRADE-IN</span><i></i><span>ATENCIÓN DIRECTA</span><i></i>
+          <span>SELECCIÓN</span><i></i><span>FINANCIAMIENTO</span><i></i><span>TRADE-IN</span><i></i><span>ATENCIÓN DIRECTA</span><i></i>
+          <span>SELECCIÓN</span><i></i><span>FINANCIAMIENTO</span><i></i><span>TRADE-IN</span><i></i><span>ATENCIÓN DIRECTA</span><i></i>
+          <span>SELECCIÓN</span><i></i><span>FINANCIAMIENTO</span><i></i><span>TRADE-IN</span><i></i><span>ATENCIÓN DIRECTA</span><i></i>
+        </div>
+        <div class="experience-marquee-segment" aria-hidden="true">
+          <span>SELECCIÓN</span><i></i><span>FINANCIAMIENTO</span><i></i><span>TRADE-IN</span><i></i><span>ATENCIÓN DIRECTA</span><i></i>
+          <span>SELECCIÓN</span><i></i><span>FINANCIAMIENTO</span><i></i><span>TRADE-IN</span><i></i><span>ATENCIÓN DIRECTA</span><i></i>
+          <span>SELECCIÓN</span><i></i><span>FINANCIAMIENTO</span><i></i><span>TRADE-IN</span><i></i><span>ATENCIÓN DIRECTA</span><i></i>
+          <span>SELECCIÓN</span><i></i><span>FINANCIAMIENTO</span><i></i><span>TRADE-IN</span><i></i><span>ATENCIÓN DIRECTA</span><i></i>
+        </div>
       </div>
     </section>
 
@@ -371,8 +382,19 @@
         <p>Estas unidades se actualizan desde el panel de control. Los vehículos marcados como <strong>mostrar en inicio</strong> aparecen en la portada de la web.</p>
       </div>
       <div class="inventory-browser-toolbar">
-        <div><strong id="allInventoryCount">0</strong><span> unidades activas</span></div>
-        <a class="btn btn-ghost" href="admin.html">Administrar inventario</a>
+        <div class="inventory-browser-count"><strong id="allInventoryCount">0</strong><span> unidades activas</span></div>
+        <div class="inventory-browser-filters">
+          <label class="inventory-browser-search">
+            <span>Buscar vehículo</span>
+            <input id="allInventorySearch" type="search" placeholder="Marca, modelo o año" autocomplete="off">
+          </label>
+          <label class="inventory-browser-type">
+            <span>Tipo de vehículo</span>
+            <select id="allInventoryType">
+              <option value="all">Todos los tipos</option>
+            </select>
+          </label>
+        </div>
       </div>
       <div class="inventory-grid inventory-browser-grid" id="allInventoryGrid"></div>
     </div>
