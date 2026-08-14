@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1a1c21"/><stop offset="1" stop-color="#07080a"/></linearGradient><radialGradient id="r"><stop stop-color="#e30613" stop-opacity=".22"/><stop offset="1" stop-color="#e30613" stop-opacity="0"/></radialGradient></defs>
+<rect width="1200" height="800" fill="url(#g)"/><circle cx="870" cy="170" r="330" fill="url(#r)"/>
+<g fill="none" stroke="#e30613" stroke-width="10" opacity=".9"><path d="M250 492h700l-74-145c-16-31-49-51-85-51H445c-37 0-70 20-86 52l-67 144Z"/><path d="M392 296l92-100h251l94 100" opacity=".55"/><circle cx="395" cy="530" r="62"/><circle cx="805" cy="530" r="62"/></g>
+<text x="600" y="655" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="50" font-weight="800">SPORT</text>
+<text x="600" y="710" text-anchor="middle" fill="#9399a3" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="4">UNIDAD DEMO 06</text>
+</svg>
