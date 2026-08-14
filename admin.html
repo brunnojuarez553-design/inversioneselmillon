@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090909" />
+  <title>Inventory OS | Inversiones El Millón</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="admin-body">
+  <aside class="admin-sidebar">
+    <a class="brand admin-brand" href="index.html"><img class="brand-logo" src="assets/logo.jpg" alt="Inversiones El Millón" /><span class="brand-wordmark"><strong>Inversiones</strong><small>El Millón</small></span></a>
+    <div class="admin-section-label">Workspace</div>
+    <nav class="admin-nav">
+      <button class="active" data-admin-view="inventory"><span>▦</span> Inventario</button>
+      <button data-admin-view="leads"><span>◌</span> Consultas <b class="nav-count">5</b></button>
+      <button data-admin-view="finance"><span>◇</span> Financiamiento <b class="nav-count">3</b></button>
+      <button data-admin-view="analytics"><span>↗</span> Estadísticas</button>
+      <button data-admin-view="team"><span>◎</span> Equipo WhatsApp</button>
+    </nav>
+    <div class="admin-profile"><div class="admin-avatar">IM</div><div><strong>Administrador</strong><small>Demo local</small></div></div>
+    <a class="btn btn-ghost admin-public-btn" href="index.html">Ver sitio público ↗</a>
+  </aside>
+  <main class="admin-main">
+    <header class="admin-topbar admin-topbar-pro">
+      <div>
+        <div class="admin-welcome-row"><span class="eyebrow">Inventory OS</span><span class="admin-online"><i></i> Catálogo sincronizado</span></div>
+        <h1>Bienvenido, El Millón.</h1>
+        <p>Tu inventario está actualizado. Gestioná lo que aparece en la web desde un solo lugar.</p>
+      </div>
+      <div class="admin-top-actions"><button class="btn btn-ghost" id="openPresentationMode" type="button">▶ Presentar demo</button><button class="btn btn-primary admin-publish-btn" id="addVehicleBtn"><span>+</span> Publicar vehículo</button></div>
+    </header>
+    <section class="admin-view active" data-view-panel="inventory">
+    <section class="platform-overview">
+      <article><span>Leads activos</span><strong id="overviewActiveLeads">0</strong><small>Oportunidades en seguimiento</small></article>
+      <article><span>Clics a WhatsApp</span><strong id="overviewWhatsappClicks">0</strong><small>Intención de contacto</small></article>
+      <article><span>Financiamiento</span><strong id="overviewFinancePending">0</strong><small>Solicitudes pendientes</small></article>
+      <article class="overview-highlight"><span>Vehículo líder</span><strong id="overviewTopVehicle">—</strong><small>Mayor interés comercial</small></article>
+    </section>
+    <section class="dashboard-stats">
+      <article><div class="stat-head"><span>Publicados</span><b>01</b></div><strong id="statPublished">0</strong><small>Total en catálogo</small></article>
+      <article><div class="stat-head"><span>Disponibles</span><b>02</b></div><strong id="statAvailable">0</strong><small>Listos para consultar</small></article>
+      <article><div class="stat-head"><span>Vendidos</span><b>03</b></div><strong id="statSold">0</strong><small>Unidades cerradas</small></article>
+      <article><div class="stat-head"><span>Destacados</span><b>04</b></div><strong id="statFeatured">0</strong><small>Prioridad visual</small></article>
+    </section>
+    <section class="admin-command-bar">
+      <div><span class="command-dot"></span><strong>Sitio público conectado</strong><small>Los cambios realizados acá se reflejan en el catálogo de la demo.</small></div>
+      <a href="index.html#inventario" target="_blank">Abrir inventario <b>↗</b></a>
+    </section>
+    <section class="activity-strip admin-card">
+      <div class="admin-card-head"><div><span class="admin-card-kicker">ACTIVIDAD RECIENTE</span><h2>Qué está pasando</h2></div></div>
+      <div id="activityFeed" class="activity-feed"></div>
+    </section>
+    <section class="admin-card">
+      <div class="admin-card-head"><div><span class="admin-card-kicker">CATÁLOGO</span><h2>Vehículos</h2></div><div class="admin-search-wrap"><span>⌕</span><input id="adminSearch" type="search" placeholder="Buscar vehículo" /></div></div>
+      <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Vehículo</th><th>Precio</th><th>Estado</th><th>Destacado</th><th>Acciones</th></tr></thead><tbody id="adminInventory"></tbody></table></div>
+    </section>
+
+    </section>
+
+    <section class="admin-view" data-view-panel="leads">
+      <div class="module-header"><div><span class="eyebrow">CRM</span><h2>Leads y oportunidades</h2><p>Gestioná cada consulta como una oportunidad comercial real.</p></div><button class="btn btn-primary" id="newLeadDemo">+ Nueva consulta</button></div>
+      <div class="module-stats"><article><span>Nuevas</span><strong id="leadStatNew">0</strong><small>Sin contactar</small></article><article><span>En seguimiento</span><strong id="leadStatFollow">0</strong><small>Conversaciones activas</small></article><article><span>Negociación</span><strong id="leadStatNegotiation">0</strong><small>Oportunidades avanzadas</small></article></div>
+      <div class="crm-board" id="crmBoard"></div>
+    </section>
+
+    <section class="admin-view" data-view-panel="finance">
+      <div class="module-header"><div><span class="eyebrow">Financiamiento</span><h2>Solicitudes de evaluación</h2><p>Revisá datos enviados desde el simulador y acompañá cada oportunidad.</p></div></div>
+      <div class="module-stats"><article><span>Solicitudes</span><strong id="financeStatTotal">0</strong><small>Total registradas</small></article><article><span>En evaluación</span><strong id="financeStatPending">0</strong><small>Pendientes</small></article><article><span>Aprobadas</span><strong id="financeStatApproved">0</strong><small>Listas para avanzar</small></article></div>
+      <div class="finance-pipeline" id="financePipeline"></div>
+    </section>
+
+    <section class="admin-view" data-view-panel="analytics">
+      <div class="module-header"><div><span class="eyebrow">Estadísticas</span><h2>Rendimiento del catálogo</h2><p>Métricas de ejemplo para mostrar cómo se puede medir la actividad comercial del sitio.</p></div><select class="analytics-range"><option>Últimos 30 días</option><option>Últimos 7 días</option><option>Últimos 90 días</option></select></div>
+      <div class="analytics-kpis"><article><span>Fichas vistas</span><strong id="analyticsTotalViews">0</strong><small>Visualizaciones de vehículos</small></article><article><span>Clics a WhatsApp</span><strong id="analyticsTotalWhatsapp">0</strong><small id="analyticsWhatsappRate">0% de interés</small></article><article><span>Financiamiento</span><strong id="analyticsTotalFinance">0</strong><small>Clics en simular financiamiento</small></article><article><span>Vehículo líder</span><strong id="analyticsTopVehicle">—</strong><small>Mayor intención de contacto</small></article></div>
+      <div class="analytics-grid analytics-grid-interest"><section class="admin-card"><div class="admin-card-head"><div><span class="admin-card-kicker">INTENCIÓN DE COMPRA</span><h2>Clics a WhatsApp por vehículo</h2><p>Se registra cada vez que un visitante toca “Consultar por WhatsApp” desde la ficha de una unidad.</p></div></div><div class="vehicle-click-table" id="vehicleClickRanking"></div></section><section class="admin-card"><div class="admin-card-head"><div><span class="admin-card-kicker">LECTURA RÁPIDA</span><h2>Cómo interpretar</h2></div></div><div class="analytics-explain"><div><strong>Vistas</strong><span>Cuántas veces abrieron la ficha del vehículo.</span></div><div><strong>WhatsApp</strong><span>Cuántas veces intentaron contactar por esa unidad.</span></div><div><strong>Tasa de interés</strong><span>Porcentaje de vistas que terminaron en clic a WhatsApp.</span></div><p>En la versión online estos eventos se guardarían en la base de datos para consultar períodos, tendencias y resultados reales.</p></div></section></div>
+    </section>
+
+    <section class="admin-view" data-view-panel="team">
+      <div class="module-header team-module-header">
+        <div><span class="eyebrow">Smart Routing</span><h2>Equipo de WhatsApp</h2><p>Un solo botón para el cliente. La plataforma asigna cada oportunidad al asesor correspondiente.</p></div>
+        <button class="btn btn-primary" id="openRoutingGuide" type="button">Ver cómo funciona</button>
+      </div>
+      <div class="routing-kpis">
+        <article><span>Asesores activos</span><strong id="routingActiveCount">1</strong><small>Números disponibles para recibir leads</small></article>
+        <article><span>Método</span><strong>Smart</strong><small>Especialidad + reparto automático</small></article>
+        <article><span>Experiencia cliente</span><strong>1 CTA</strong><small>El visitante nunca tiene que elegir vendedor</small></article>
+      </div>
+      <section class="admin-card routing-config-card">
+        <div class="admin-card-head"><div><span class="admin-card-kicker">CONFIGURACIÓN DEMO</span><h2>Asesores comerciales</h2><p>Agregá hasta tres números para probar el reparto dentro de la demo. En producción esto se guarda en la base de datos.</p></div></div>
+        <div class="routing-team-grid" id="routingTeamGrid"></div>
+        <div class="routing-config-actions"><button class="btn btn-primary" id="saveRoutingTeam" type="button">Guardar equipo</button><button class="btn btn-ghost" id="resetRoutingTeam" type="button">Restablecer demo</button><span id="routingSaveStatus" aria-live="polite"></span></div>
+      </section>
+      <section class="routing-flow-card">
+        <div class="routing-flow-copy"><span class="eyebrow">Flujo comercial</span><h3>El lead llega al vendedor correcto sin agregar fricción.</h3><p>Las consultas generales se reparten en rotación. Si existe un asesor especializado en financiamiento o trade-in, esas oportunidades se priorizan hacia ese perfil.</p></div>
+        <div class="routing-flow">
+          <div><b>01</b><strong>Cliente</strong><span>Toca “Hablar por WhatsApp”</span></div><i>→</i><div><b>02</b><strong>Routing</strong><span>Detecta origen y disponibilidad</span></div><i>→</i><div><b>03</b><strong>Asesor</strong><span>Recibe el lead con contexto</span></div><i>→</i><div><b>04</b><strong>CRM</strong><span>Queda registrado quién lo atiende</span></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <dialog class="presentation-dialog" id="presentationDialog">
+    <button class="presentation-close" type="button" data-close-presentation>×</button>
+    <div class="presentation-shell">
+      <div class="presentation-brand"><img src="assets/logo.jpg" alt="Inversiones El Millón"><div><small>DEMO COMERCIAL GUIADA</small><strong>Inventory OS</strong></div></div>
+      <div class="presentation-progress"><span id="presentationProgress">Paso 1 de 6</span><div><i id="presentationProgressBar"></i></div></div>
+      <div class="presentation-stage" id="presentationStage"></div>
+      <div class="presentation-actions"><button class="btn btn-ghost" id="presentationPrev" type="button">← Anterior</button><button class="btn btn-primary" id="presentationNext" type="button">Siguiente →</button></div>
+    </div>
+  </dialog>
+
+  <dialog class="routing-guide-dialog" id="routingGuideDialog">
+    <button class="modal-close" type="button" data-close-routing-guide>×</button>
+    <div class="routing-guide-shell">
+      <span class="eyebrow">Guía · múltiples WhatsApp</span>
+      <h2>Un solo punto de entrada. Varios vendedores detrás.</h2>
+      <p class="routing-guide-lead">El cliente siempre ve un único CTA. La plataforma decide a qué número dirigirlo y guarda el asesor asignado junto con la oportunidad.</p>
+      <div class="routing-guide-steps">
+        <article><b>01</b><h3>Configurás el equipo</h3><p>Cargás nombre, número de WhatsApp, especialidad y si el asesor está activo.</p></article>
+        <article><b>02</b><h3>La web identifica el origen</h3><p>Puede saber si la consulta vino de un vehículo, financiamiento, trade-in o un contacto general.</p></article>
+        <article><b>03</b><h3>Se asigna automáticamente</h3><p>Financiamiento puede ir al especialista. Las consultas generales se reparten entre los vendedores activos mediante rotación.</p></article>
+        <article><b>04</b><h3>El CRM conserva el contexto</h3><p>Queda registrado vehículo, canal y asesor asignado para que el dueño pueda revisar el seguimiento.</p></article>
+      </div>
+      <div class="routing-guide-example"><small>EJEMPLO</small><strong>Consulta BMW X5 → Asesor 2 → WhatsApp del Asesor 2 → Lead registrado como “Asignado a Asesor 2”.</strong></div>
+      <div class="routing-guide-note"><strong>Demo vs. versión final</strong><p>En esta demo la configuración y el reparto se guardan localmente en el navegador. En la versión final se conecta al backend para que la asignación sea compartida entre todos los dispositivos y usuarios del concesionario.</p></div>
+    </div>
+  </dialog>
+
+  <dialog class="admin-dialog" id="vehicleFormDialog">
+    <form method="dialog" id="vehicleForm">
+      <button type="button" class="modal-close" id="closeVehicleForm">×</button>
+      <span class="eyebrow">Gestión de inventario</span>
+      <h2 id="formTitle">Agregar vehículo</h2>
+      <p class="dialog-intro">Completá la información que querés mostrar en el catálogo público.</p>
+      <input type="hidden" id="vehicleId" />
+      <div class="form-grid">
+        <label>Marca<input id="vehicleBrand" required /></label>
+        <label>Modelo<input id="vehicleModel" required /></label>
+        <label>Año<input id="vehicleYear" type="number" required /></label>
+        <label>Precio (USD)<input id="vehiclePriceInput" type="number" placeholder="Opcional" /></label>
+        <label>Tipo<select id="vehicleTypeInput"><option>SUV</option><option>Sedán</option><option>Pickup</option><option>Deportivo</option></select></label>
+        <label>Millaje<input id="vehicleMileage" placeholder="Ej. 32,000 mi" /></label>
+        <label>Potencia<input id="vehiclePower" placeholder="Ej. 600 HP" /></label>
+        <label>Motor<input id="vehicleEngine" placeholder="Ej. V8 5.3L / 3.0 Turbo" /></label>
+        <label>Transmisión<input id="vehicleTransmission" placeholder="Automática" /></label>
+        <label>Color<input id="vehicleColor" /></label>
+        <label>Estado comercial<select id="vehicleStatus"><option value="available">Disponible</option><option value="reserved">Reservado</option><option value="negotiation">En negociación</option><option value="sold">Vendido</option><option value="incoming">Próximo ingreso</option></select></label>
+        <div class="full photo-uploader-wrap">
+          <span class="form-section-title">Fotos del vehículo</span>
+          <input id="vehiclePhotos" class="native-photo-input" type="file" accept="image/*" multiple>
+          <label class="iphone-photo-picker" for="vehiclePhotos">
+            <span class="iphone-photo-plus">+</span>
+            <span><strong>Agregar imágenes</strong><small>Elegí las fotos directamente desde la galería del celular</small></span>
+          </label>
+          <div class="photo-preview" id="photoPreview"><small>Todavía no seleccionaste imágenes.</small></div>
+        </div>
+        <label class="full">Descripción<textarea id="vehicleDescription" placeholder="Descripción breve del vehículo"></textarea></label>
+        <div class="full equipment-editor">
+          <div class="equipment-editor-head"><span class="form-section-title">Equipamiento y tecnología</span><small>Seleccioná Sí, No o A consultar para cada característica.</small></div>
+          <div class="feature-controls" id="featureControls"></div>
+        </div>
+      </div>
+      <div class="switch-row"><label><input id="vehicleFeatured" type="checkbox" /> Mostrar en inicio / Destacado</label></div>
+      <button class="btn btn-primary btn-block" type="submit">Guardar vehículo</button>
+    </form>
+  </dialog>
+
+  <script src="assets/admin.js"></script>
+</body>
+</html>
