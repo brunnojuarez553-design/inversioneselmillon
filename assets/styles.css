@@ -833,3 +833,86 @@ body:has(.about-modal[open]){overflow:hidden}
   }
   .hero-inventory-cta::before{animation-duration:2.6s}
 }
+
+
+/* V13 · CTA principal debajo de las cards */
+.inventory-section-actions{
+  position:relative;
+  z-index:3;
+  padding-top:6px;
+}
+.inventory-main-cta{
+  position:relative;
+  min-width:260px;
+  min-height:58px;
+  padding:16px 28px;
+  border-radius:15px;
+  color:#fff!important;
+  background:linear-gradient(135deg,#ff1727,#d90010)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:0 16px 42px rgba(227,6,19,.34),0 0 0 0 rgba(227,6,19,.34)!important;
+  overflow:hidden;
+  isolation:isolate;
+  animation:inventoryMainCtaPulse 2s ease-in-out infinite!important;
+  transform-origin:center;
+}
+.inventory-main-cta::before{
+  content:"";
+  position:absolute;
+  top:-85%;
+  left:-40%;
+  width:26%;
+  height:280%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.88),transparent);
+  transform:rotate(18deg);
+  z-index:0;
+  animation:inventoryMainCtaShine 2.45s ease-in-out infinite!important;
+  pointer-events:none;
+}
+.inventory-main-cta::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  box-shadow:0 0 0 0 rgba(255,23,39,.5);
+  animation:inventoryMainCtaRing 2s ease-out infinite!important;
+  pointer-events:none;
+}
+.inventory-main-cta>*{position:relative;z-index:1}
+.inventory-main-cta .inventory-cta-arrow{
+  display:inline-block;
+  font-size:18px;
+  animation:inventoryArrowNudge 1.25s ease-in-out infinite;
+}
+.inventory-main-cta:hover{
+  transform:translateY(-3px) scale(1.02)!important;
+  box-shadow:0 22px 55px rgba(227,6,19,.44)!important;
+}
+@keyframes inventoryMainCtaPulse{
+  0%,100%{transform:scale(1);box-shadow:0 16px 42px rgba(227,6,19,.30),0 0 0 0 rgba(227,6,19,.32)}
+  50%{transform:scale(1.025);box-shadow:0 20px 50px rgba(227,6,19,.42),0 0 0 8px rgba(227,6,19,.08)}
+}
+@keyframes inventoryMainCtaShine{
+  0%,16%{left:-40%;opacity:0}
+  26%{opacity:1}
+  60%{left:118%;opacity:0}
+  100%{left:118%;opacity:0}
+}
+@keyframes inventoryMainCtaRing{
+  0%{box-shadow:0 0 0 0 rgba(255,23,39,.48);opacity:.8}
+  70%{box-shadow:0 0 0 13px rgba(255,23,39,0);opacity:0}
+  100%{box-shadow:0 0 0 13px rgba(255,23,39,0);opacity:0}
+}
+@keyframes inventoryArrowNudge{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(5px)}
+}
+@media(max-width:620px){
+  .inventory-main-cta{
+    width:min(100%,290px)!important;
+    min-width:0!important;
+    min-height:52px!important;
+    padding:13px 20px!important;
+    font-size:13px!important;
+  }
+}
